@@ -1,0 +1,24 @@
+{
+  "name": "Hangman-CL-Game",
+  "version": "1.0.0",
+  "description": "This hangman is a command-line game using Javascript constructor functions .",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priyaA01/Hangman-CL-Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/priyaA01/Hangman-CL-Game/issues"
+  },
+  "homepage": "https://github.com/priyaA01/Hangman-CL-Game#readme",
+  "dependencies": {
+    "inquirer": "^5.1.0",
+    "keypress": "^0.2.1"
+  }
+}
