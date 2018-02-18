@@ -1,48 +1,65 @@
-//contains the logic to choose the word and keeps track of guessed letters and guesses remaining
-//allow user to select new word or keep in guessing if guesses reaminning is 5 or low
-var Word = require("./word.js");
 var inquirer = require('inquirer');
-//var gameStart=true;
+var Word = require("./Word.js");
 
-var Game = function(){
+var words = ["Australia", "Brazil", "Canada", "Denmark", "Egypt", "France", "India", "Japan", "China", "Mexico"];
+var guessesLeft = 10;
 
-     /* words property contains all the words */
-    this.words = ["Australia", "Brazil", "Canada", "Denmark", "Egypt", "France", "India", "Japan", "China", "Mexico"];
-    this.guessesLeft = 10 ;
+/*displayword function randmly picks a word from the words property and displays it to the user
+ in hyphens, so the user can guess the letter behind each hyphen*/
+function start()
+{
+	var wordToFind = words[Math.floor(Math.random() * words.length)];	
+	guessesLeft =10;
+	displayWord(wordToFind);
+}
 
-    /*displayword function randmly picks a word from the words property and displays it to the user
-     in hyphens, so the user can guess the letter behind each hyphen*/
-    this.displayWord = function() {
-        var wordToFind = this.words[Math.floor(Math.random() * this.words.length)];
-        var word = new Word(wordToFind);
-        word.wordFind();
-        inquirer
-		  .prompt([
-		    {
-		      type: "input",
-		      message: "Guess a Letter!  ",
-		      name: "userguess"
-		    }
-		    ])
-		  .then(function(response) {
+function displayWord(wordToFind) {
+	var word = new Word(wordToFind);
+	var wordNew = word.wordFind();
+	console.log(wordNew);
+	if (wordNew != "") {
+		inquirer.prompt([{
+				type: "input",
+				message: "Guess a Letter!",
+				name: "userguess"
+			}])
+			.then(function (response) {
+				if (response.userguess != "") {
+					//console.log("got response  " + response.userguess);
+					if(word.letterGuess(response.userguess))
+					{
+						console.log("CORRECT");
+						console.log(word.wordFind());
+					}
+					else
+					{
+						console.log("INCORRECT");
+						guessesLeft--;
+						console.log("Guesses Remaining " + guessesLeft);
+					}
+					if(guessesLeft > 0)
+					{
+						displayWord(wordNew,word);
+					}
+					else if(guessesLeft == 0)
+					{
+						console.log("Guesses over! Try new word now");
+						start();
+					}
+					else
+					{
+						console.log("You got the word correct");
+						start();
+					}
+				}
+			});
+	}
+}
 
-		  		word.letterGuess(response.userguess);
-		    
-		  });
+start();
 
 
-        /*if(word.guessesLeft<10)
-        {
-        	console.log("Guesses Reamining  " + word.guessesLeft );
-        }*/
-
-        
-    };
-};
-
-//export for Game constructor
-module.exports=Game;
-
-
-//var game1= new Game();
-//console.log(game1.displayWord());
+/*if(word.guessesLeft<10)
+{
+	console.log("Guesses Reamining  " + word.guessesLeft );
+}*/

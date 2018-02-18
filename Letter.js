@@ -4,7 +4,7 @@ var Letter = function(wordToFind){
 	var guessedletter = "" ;
 	var guessed = false;
 
-	this.returnChar = function ()
+	this.returnChar = function (guessedletter)
 	{
 		if(guessed)
 		{
@@ -19,7 +19,7 @@ var Letter = function(wordToFind){
 	{
 		if(this.wordToFind.indexOf(letter) > -1 )
 		{
-			guessedletter = letter;
+			//guessedletter = letter;
 			guessed = true;
 		}
 		return guessed;

@@ -9,7 +9,7 @@ var Word = function(wordToFind){
     this.wordFind = function()
     {
     	for (var i = 0; i < this.wordToFind.length; i++) {
-          word += (letter.returnChar());
+          word += letter.returnChar(this.wordToFind[i]);
         }
     	return word;
     };
@@ -17,10 +17,7 @@ var Word = function(wordToFind){
     this.letterGuess = function(char)
     {
     	var guessed=letter.userGuess(char);
-    	if(guessed)
-    	{
-    		
-    	}
+    	return guessed;
     };
   
 };
