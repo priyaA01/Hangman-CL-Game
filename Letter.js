@@ -4,11 +4,11 @@ var Letter = function(wordToFind){
 	var guessedletter = "" ;
 	var guessed = false;
 
-	this.returnChar = function (guessedletter)
+	this.returnChar = function ()
 	{
 		if(guessed)
 		{
-			return guessedletter;
+        	return guessedletter;
 		}
 		else
 		{
@@ -19,7 +19,7 @@ var Letter = function(wordToFind){
 	{
 		if(this.wordToFind.indexOf(letter) > -1 )
 		{
-			//guessedletter = letter;
+			guessedletter = letter;
 			guessed = true;
 		}
 		return guessed;

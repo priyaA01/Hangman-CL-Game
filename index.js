@@ -1,31 +1,31 @@
 var inquirer = require('inquirer');
 var Word = require("./Word.js");
 
-var words = ["Australia", "Brazil", "Canada", "Denmark", "Egypt", "France", "India", "Japan", "China", "Mexico"];
+var words = ["australia", "brazil", "canada", "denmark", "egypt", "france", "india"];
 var guessesLeft = 10;
+var wordToFind = "" ;
 
-/*displayword function randmly picks a word from the words property and displays it to the user
- in hyphens, so the user can guess the letter behind each hyphen*/
 function start()
 {
-	var wordToFind = words[Math.floor(Math.random() * words.length)];	
+	wordToFind = words[Math.floor(Math.random() * words.length)];	
 	guessesLeft =10;
-	displayWord(wordToFind);
+	displayWord();
 }
 
-function displayWord(wordToFind) {
+function displayWord() {
 	var word = new Word(wordToFind);
 	var wordNew = word.wordFind();
 	console.log(wordNew);
 	if (wordNew != "") {
 		inquirer.prompt([{
 				type: "input",
-				message: "Guess a Letter!",
+				message: "Guess a Letter! (Country Name):  ",
 				name: "userguess"
 			}])
 			.then(function (response) {
+				//empty entry shd be wrong
 				if (response.userguess != "") {
-					//console.log("got response  " + response.userguess);
+					//console.log("got response  " + word.letterGuess(response.userguess));
 					if(word.letterGuess(response.userguess))
 					{
 						console.log("CORRECT");
@@ -39,7 +39,7 @@ function displayWord(wordToFind) {
 					}
 					if(guessesLeft > 0)
 					{
-						displayWord(wordNew,word);
+						displayWord();
 					}
 					else if(guessesLeft == 0)
 					{
@@ -52,14 +52,28 @@ function displayWord(wordToFind) {
 						start();
 					}
 				}
+				else{
+					console.log("Do you want to exit Game?");
+					inquirer.prompt([{
+						 type: "confirm",
+					      message: "Are you sure:",
+					      name: "confirm",
+					      default: true
+					}])
+					.then(function (result) {
+						if (result.confirm) {
+					      console.log("\nYou are exiting the Game");
+					    }
+					    else {
+					    	console.log("You Got a new word to guess");
+					    	start();
+					    }
+
+					});
+				}
 			});
 	}
 }
 
 start();
 
-
-/*if(word.guessesLeft<10)
-{
-	console.log("Guesses Reamining  " + word.guessesLeft );
-}*/
