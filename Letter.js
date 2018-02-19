@@ -1,28 +1,31 @@
 
-var Letter = function(wordToFind){
-	this.wordToFind = wordToFind;
-	var guessedletter = "" ;
-	var guessed = false;
+var guessedletter = "" ;
+
+var Letter = function(letter){
+	this.letter = letter;
+	this.guessed = false;
 
 	this.returnChar = function ()
 	{
-		if(guessed)
+		console.log("LI " +guessedletter + ", " + this.letter);
+		if(guessedletter == this.letter)
 		{
-        	return guessedletter;
+			return guessedletter;
 		}
 		else
 		{
 			return "-";
 		}
 	};
-	this.userGuess = function(letter)
+	this.userGuess = function(char)
 	{
-		if(this.wordToFind.indexOf(letter) > -1 )
+		//if(this.wordToFind.indexOf(char) > -1 )
+		if(this.letter.indexOf(char) > -1)
 		{
-			guessedletter = letter;
-			guessed = true;
+			guessedletter = char;
+			this.guessed = true;
 		}
-		return guessed;
+		return this.guessed;
 	};
 
 };
@@ -31,6 +34,6 @@ var Letter = function(wordToFind){
 module.exports=Letter;
 
 
-//var letter1= new Letter("india");
-//console.log(letter1.userGuess("i"));
-//console.log(letter1.returnChar());
+/*var letter1= new Letter("i");
+console.log(letter1.userGuess("i"));
+console.log(letter1.returnChar());*/

@@ -1,36 +1,64 @@
 var Letter = require("./Letter.js");
 
+var wordNew=[];
+var alpha =["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var Word = function(wordToFind){
 
 	this.wordToFind = wordToFind;
-   	var letters=[];
-    var letter = new Letter(this.wordToFind);
-    var userguess="";
-       	
+    this.letters=[];
+    this.userguess="";
+    this.word="";
+
+    for (var j = 0; j < this.wordToFind.length; j++)
+    {
+        this.letters.push(new Letter(this.wordToFind[j]));            
+       // console.log("l " + this.letters);
+    }
+
     this.wordFind = function()
     {
-    	for (var i = 0; i < this.wordToFind.length; i++) {
-            //word=this.wordToFind.indexOf(char);
-			letters[i] = letter.returnChar(userguess);
-            if(wordToFind[i] == letters[i])
+        //var wordNew="";
+        //console.log("l " + this.letters.length);
+    	for (var i = 0; i < this.letters.length; i++) 
+        {
+            if(this.letters[i].returnChar(wordToFind[i]) === this.userguess)
             {
-                letters[i]=userguess;
-                console.log("letters  " + letters[i]);
-               
-          //word.push(letter.returnChar(this.wordToFind[i]));
+                wordNew[i] = this.userguess;
             }
-            else
+            else 
             {
-                letters[i]="-";
+                if(wordNew[i] != "-" && wordNew[i] !="")
+                {
+                    console.log("there");
+                    wordNew[i]=wordNew[i];
+                }
+                else{
+                    console.log("here");
+                    wordNew[i] = "-" ;
+                }
+                
             }
+            console.log("l2 " + wordNew);
         }
-    	return letters.toString();
-    };
+        
+        //this.word=wordNew.join('');
+        //console.log("word" + this.word);
+        return wordNew.toString();
+      };
 
     this.letterGuess = function(char)
     {
-    	var guessed=letter.userGuess(char);
-    	userguess = char;
+        var guessed=false;
+
+        for (var i = 0; i < this.letters.length; i++) 
+        {
+        	guessed=this.letters[i].userGuess(char);
+            if(guessed){
+                this.userguess = char;
+                break;
+            }        	
+        }
+        //console.log("letter " +this.userguess);
     	return guessed;
     };
   
@@ -40,6 +68,9 @@ var Word = function(wordToFind){
 module.exports=Word;
 
 
-//var letter1= new Word("indiana");
-//console.log(letter1.wordFind());
-//console.log(letter1.returnChar());
+/*var letter1= new Word("canada");
+console.log(letter1.letterGuess("a"));
+console.log(letter1.wordFind());*/
+
+
+
