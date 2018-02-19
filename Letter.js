@@ -1,27 +1,19 @@
+var guessedletter = "";
 
-var guessedletter = "" ;
-
-var Letter = function(letter){
+var Letter = function (letter) {
 	this.letter = letter;
 	this.guessed = false;
 
-	this.returnChar = function ()
-	{
-		console.log("LI " +guessedletter + ", " + this.letter);
-		if(guessedletter == this.letter)
-		{
+	this.returnChar = function () {
+		//console.log("LI " +guessedletter + ", " + this.letter);
+		if (guessedletter == this.letter) {
 			return guessedletter;
-		}
-		else
-		{
+		} else {
 			return "-";
 		}
 	};
-	this.userGuess = function(char)
-	{
-		//if(this.wordToFind.indexOf(char) > -1 )
-		if(this.letter.indexOf(char) > -1)
-		{
+	this.userGuess = function (char) {
+		if (this.letter.indexOf(char) > -1) {
 			guessedletter = char;
 			this.guessed = true;
 		}
@@ -31,7 +23,7 @@ var Letter = function(letter){
 };
 
 //export for Letter constructor
-module.exports=Letter;
+module.exports = Letter;
 
 
 /*var letter1= new Letter("i");
