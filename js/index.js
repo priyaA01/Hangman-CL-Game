@@ -1,3 +1,4 @@
+
 //reuire for inquirer and word constructor
 var inquirer = require('inquirer');
 var Word = require("./Word.js");
