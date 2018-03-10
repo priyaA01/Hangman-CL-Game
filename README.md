@@ -2,15 +2,15 @@
 This hangman is a command-line game using Javascript constructor functions .
 
 
-##Pre-requisites
+## Pre-requisites
 
   * installed node JS.	
   * inquirer or prompt npm packages.
 
 ## Walkthrough
 
-* ![Hangman](/images/correct.gif)
-* ![Hangman](/images/wrong.gif)
+![Hangman](/images/correct.gif)
+![Hangman](/images/wrong.gif)
 
 
 
